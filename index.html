@@ -40,18 +40,93 @@
 		<h1 class="masthead">Time of Day</h1>
 	</header>
     <main>
-	 <header><h3>A JavaScript Project by YOUR NAME HERE</h3></header>
-	    <p>Explain what your page does and how it works here!</p>
-	  <img src="http://dummyimage.com/300x400" alt="Time of Day Image" class="flexible">
+	 <header><h3>A JavaScript Project by Lovell Pualani</h3></header>
+	 <h3 id="my-greeting">Greeting Goes Here</h3>
+	 <h3 id="my-day">Week Day Goes Here</h3>
+	    <p> I created a web page incorporating JavaScript to detect the present hour and display distinct images, personalized messages, 
+            and colors corresponding to various times of the day. 
+            I implemented code to indicate the accurate day of the week.</p>
+	  <img id="my-pic" src="http://dummyimage.com/300x400" alt="Time of Day Image" class="flexible">
      <footer>
-      <p><small>&copy; 2022 by 
-          YOUR NAME HERE, All Rights Reserved ~ 
-          <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
-          <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
+      <p>
+		<small id="copyright"></small>
+		<a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
+        <a id="css-checker" href="#" target="_blank">Check CSS</a>
      </p>
     </footer>
   </main>
  <script>
+
+	/*
+
+	Create a web page that uses JavaScript to determine the current hour, and presents a different 
+	image, custom message, and color based on each of the following times of day:
+
+	Morning (5am to 12 noon)
+	Afternoon (12 noon to 6pm)
+	Evening (6pm to 11pm)
+	Night (11pm to 5am)
+
+	*/
+
+	function displayTimeOfDay() {
+		let myDate = new Date();
+		let myHour = myDate.getHours();
+		//myHour = 4;
+		let myDay = myDate.getDay();
+		let myGreeting = "";
+		let myColor = "";
+		let myPic = "";
+
+		console.log(myHour);
+
+		if(myHour >= 5 && myHour < 12){
+			//alert("good morning!");
+			myGreeting = "Good Morning!";
+			myColor = "yellow";
+			myPic = "morning.jpg"
+		}else if(myHour >= 12 && myHour < 18){
+			//alert("good afternoon!");
+			myGreeting = "Good Afternoon!";
+			myColor = "blue";
+			myPic = "afternoon.jpg"
+		}else if(myHour >= 18 && myHour < 23){
+			//alert("good evening!");
+			myGreeting = "Good Evening!";
+			myColor = "green";
+			myPic = "evening.jpg"
+		}else{
+			//alert("good night!");
+			myGreeting = "Good Night!";
+			myColor = "cyan";
+			myPic = "evening.jpg"
+		}
+
+		myPic = "images/" + myPic;
+
+		document.getElementById("my-greeting").innerHTML = myGreeting;
+		document.querySelector("html").style.backgroundColor = myColor;
+		document.getElementById("my-pic").src = myPic;
+
+		// Add day of the week
+		let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		let currentDayOfWeek = "Today is " + daysOfWeek[myDay] + "!";
+		document.getElementById("my-day").innerHTML = currentDayOfWeek;
+	}
+
+	// Call the function to display the time of day and day of the week
+	displayTimeOfDay();
+
+	// Generate dynamic copyright
+	let currentYear = new Date().getFullYear();
+    let companyName = "Lovell Pualani";
+    let copyrightElement = document.getElementById("copyright");
+    if (copyrightElement) {
+      let copyrightText =
+        "&copy; " + currentYear + " by " + companyName + ", All Rights Reserved ~";
+      copyrightElement.innerHTML = copyrightText;
+    }
+
     document.getElementById("html-checker").setAttribute("href","https://validator.w3.org/nu/?doc=" + location.href);
     document.getElementById("css-checker").setAttribute("href","https://jigsaw.w3.org/css-validator/validator?uri=" + location.href);  
  </script>
